@@ -11,7 +11,7 @@ pipeline{
                 script{
                     
                     sh """
-                       docker build -t arun596/todoapp:v2 .
+                       docker build -t arun596/todoapp:v3 .
                     """
                 }
             }
@@ -22,8 +22,8 @@ pipeline{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pwd', usernameVariable: 'user')]) {
                      sh """
                         docker login -u $user -p $pwd 
-                        docker push arun596/todoapp:v2
-                        docker rmi arun596/todoapp:v2
+                        docker push arun596/todoapp:v3
+                        docker rmi arun596/todoapp:v3
                      """
     
                     }
@@ -33,7 +33,7 @@ pipeline{
         }
         stage('run image'){
             steps{
-                sh 'docker run -d --name todoApp -p 3000:3000 arun596/todoapp:v2'
+                sh 'docker run -d --name todoApp -p 3000:3000 arun596/todoapp:v3'
             }
         }
     }
