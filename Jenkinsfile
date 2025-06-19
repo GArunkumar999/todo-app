@@ -11,7 +11,7 @@ pipeline{
                 script{
                     
                     sh """
-                       docker build -t arun596/todoapp:latest .
+                       docker build -t arun596/todoapp:v1 .
                     """
                 }
             }
@@ -22,7 +22,8 @@ pipeline{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pwd', usernameVariable: 'user')]) {
                      sh """
                         docker login -u $user -p $pwd 
-                        docker push arun596/todoapp:latest
+                        docker push arun596/todoapp:v1
+                        docker rmi arun596/todoapp:v1
                      """
     
                     }
