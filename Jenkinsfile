@@ -33,7 +33,7 @@ pipeline{
         }
         stage('run image'){
             steps{
-                sh 'docker run -d --name TodoApp -p 3000:3000 arun596/todoapp:v3'
+                sh 'docker run -d --name todoApp -p 3000:3000 arun596/todoapp:v3'
             }
         }
     }
