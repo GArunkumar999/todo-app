@@ -35,6 +35,7 @@ pipeline{
     post{
         success{
             echo "build success"
+            deleteDir()
         }
         failure{
             echo "build failure"
