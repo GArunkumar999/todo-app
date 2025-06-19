@@ -9,9 +9,24 @@ pipeline{
         stage('image build'){
             steps{
                 script{
+                    
                     sh """
-                       docker build -t todoapp:latest .
+                       docker build -t arun596/todoapp:latest .
                     """
+                }
+            }
+        }
+        stage('push to dockerhub'){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pwd', usernameVariable: 'user')]) {
+                     sh """
+                        docker login -u $user -p $pwd 
+                        docker push arun596/todoapp:latest
+                     """
+    
+                    }
+                    
                 }
             }
         }
